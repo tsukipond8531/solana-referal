@@ -68,6 +68,7 @@ const PackageDetails = ({ displayPackage }: any) => {
         .signers([])
         .rpc();
 
+      console.log({ response });
       console.log("purchase_package function called successfully.");
     } catch (error) {
       console.error("Error calling purchase_package:", error);

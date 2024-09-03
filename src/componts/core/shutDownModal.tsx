@@ -30,7 +30,7 @@ const ShutDownModal = ({ isStartOpen, onStartClose, openModalClose }: any) => {
                 writingMode: "tb-rl",
               }}
             >
-              HeffernanOS
+              SOLANA REFERRAL
             </Text>
           </Box>
           <Flex
