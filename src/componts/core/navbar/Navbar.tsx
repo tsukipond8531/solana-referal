@@ -22,7 +22,7 @@ import { TbPackages } from "react-icons/tb";
 import { LuLineChart } from "react-icons/lu";
 import { IoHome } from "react-icons/io5";
 
-const Navbar = ({ pathname, setPathname }: any) => {
+const Navbar = ({ pathname, setPathname, showReferralTab }: any) => {
   const { wallet, connect, disconnect, select } = useWallet();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
