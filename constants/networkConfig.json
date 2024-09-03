@@ -1,0 +1,8 @@
+{
+    "network": "https://api.devnet.solana.com",
+    "backend_endpoint": "http://ec2-44-212-1-97.compute-1.amazonaws.com",
+    "frontend_endpoint": "https://solana-referral.vercel.app/referral",
+    "smart_contract": "FqMQ5TF8M5pEWGzbj7gDx3ezJVniebaSHBmA4MexUN51",
+    "founder_wallet": "982fzbji2WuZNvLE7w4PiXzdeRYuiVahBEBNhv21nKyN",
+    "lp_wallet": "AAMEXH5VRxdxwBb9zWn76kcuqVXgTHHEw4fdZWHj1KyP"
+}
