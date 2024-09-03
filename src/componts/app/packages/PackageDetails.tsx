@@ -1,5 +1,18 @@
 import React from "react";
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { useWallet } from "@solana/wallet-adapter-react";
+import {
+  Connection,
+  PublicKey,
+  Transaction,
+  LAMPORTS_PER_SOL,
+} from "@solana/web3.js";
+import { Program, AnchorProvider, web3, BN } from "@project-serum/anchor";
+import NETWORK from "@/constants/networkConfig.json";
+import IDL from "@/constants/idl_4.json"; // Adjust the path to your IDL file
+
+const programID = new PublicKey(NETWORK.smart_contract);
+const network = NETWORK.network;
 
 const PackageDetails = ({ displayPackage }: any) => {
   const wallet: any = useWallet();
@@ -67,52 +80,43 @@ const PackageDetails = ({ displayPackage }: any) => {
   return (
     <Box>
       <Text fontSize="32px">Packages details</Text>
-      <Box p="15px" bg="#f5f5f5">
-        <Image
-          w="100%"
-          maxH="366px"
-          src="https://i.ibb.co/9HM56Zb/Rectangle-66.png"
-        />
-      </Box>
-      <Text fontSize="32px" mt="50px" mb="20px">
-        EMERALD plan
-      </Text>
-      <Text fontSize="16px">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </Text>
-      <Text fontSize="16px" mt="30px">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-        qui officia deserunt mollit anim id est laborum.
-      </Text>
-      <Text fontSize="32px" mt="30px" mb="20px">
-        Price: 10 SOL
-      </Text>
-      <Text fontSize="16px">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </Text>
+      <Flex>
+        <Box p="15px" width={"50%"}>
+          <Image w="100%" maxH="366px" src={displayPackage.image} />
+        </Box>
+        <Box width={"50%"}>
+          <Text fontSize="32px" mb="20px">
+            {displayPackage?.name} plan
+          </Text>
+          <Text fontSize="16px">{displayPackage?.description}</Text>
+          <Flex
+            gap="16px"
+            justifyContent="space-between"
+            alignContent={"center"}
+            mt="30px"
+          >
+            <Text fontSize="32px" mb="20px">
+              Price: {displayPackage?.price} SOL
+            </Text>
+            <Button
+              border="none"
+              color="white"
+              bg="#05A41F"
+              fontSize="16px"
+              fontWeight="normal"
+              borderRadius="30px"
+              onClick={async () => {
+                await callPurchasePackage(
+                  displayPackage.id,
+                  displayPackage.price
+                );
+              }}
+            >
+              BUY
+            </Button>
+          </Flex>
+        </Box>
+      </Flex>
     </Box>
   );
 };
